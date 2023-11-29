@@ -10,7 +10,7 @@ export const Character = () => {
     marvelApiService
       .getCharacterById(parseInt(id as string))
       .then((character) => setCharacter(character));
-  }, []);
+  }, [id]);
 
   return (
     <div className="min-h-screen bg-gray-200">
