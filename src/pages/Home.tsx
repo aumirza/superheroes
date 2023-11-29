@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FaFilter, FaSortAlphaUp } from "react-icons/fa";
 import { CharacterItem } from "../components/CharacterItem";
 import { Header } from "../components/Header";
@@ -10,6 +10,24 @@ export const Home = () => {
   const [searchResults, setSearchResults] = useState<character[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
+  const searchHandler = useCallback(
+    (searchTerm: string) => {
+      if (!searchTerm) return setSearchResults([]);
+
+      const fuse = new Fuse(characters, {
+        keys: ["name"],
+        includeScore: true,
+        threshold: 0.3,
+        distance: 10,
+      });
+
+      const result = fuse.search(searchTerm);
+      const characterResults = result.map((character) => character.item);
+      setSearchResults(characterResults);
+    },
+    [characters]
+  );
+
   useEffect(() => {
     marvelApiService
       .getAllCharacters()
@@ -18,22 +36,7 @@ export const Home = () => {
 
   useEffect(() => {
     searchHandler(searchTerm);
-  }, [searchTerm]);
-
-  const searchHandler = (searchTerm: string) => {
-    if (!searchTerm) return setSearchResults([]);
-
-    const fuse = new Fuse(characters, {
-      keys: ["name"],
-      includeScore: true,
-      threshold: 0.3,
-      distance: 10,
-    });
-
-    const result = fuse.search(searchTerm);
-    const characterResults = result.map((character) => character.item);
-    setSearchResults(characterResults);
-  };
+  }, [searchTerm, searchHandler]);
 
   return (
     <div className="min-h-screen bg-gray-200">
