@@ -1,6 +1,6 @@
 import Fuse from "fuse.js";
 import { useEffect, useState } from "react";
-import { FaFilter, FaSortAlphaUp, FaSortAlphaDown } from "react-icons/fa";
+import { FaFilter, FaSortAlphaUp } from "react-icons/fa";
 import { CharacterItem } from "../components/CharacterItem";
 import { Header } from "../components/Header";
 import { marvelApiService } from "../services";
