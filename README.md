@@ -5,7 +5,7 @@
 # Learned in this project
 
 - How to use the Marvel API
-- Implementing the Fuzzy Search
+- Implementation of Fuzzy Search
 
 # Todo
 
