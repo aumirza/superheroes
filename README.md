@@ -6,17 +6,22 @@
 
 - How to use the Marvel API
 - Implementation of Fuzzy Search
+- Implementing pagination
 
 # Todo
 
-- [ ] Add pagination
+- [x] Add pagination
+- [x] Add more details to the hero page
 - [ ] Add filters
-- [ ] Add more details to the hero page
+  - [x] UI
+  - [ ] Implementation
 
 # fix
 
-- [ ] Fix the search
-- [ ] fix sorting
+- [x] Fix the search
+- [x] fix sorting
+
+# Tech stack
 
 ### How to run
 

@@ -21,6 +21,21 @@ interface detailedCharacter extends character {
         items: story[];
         returned: number;
     }
+    series: {
+        available: number;
+        collectionURI: string;
+        items: series[];
+        returned: number;
+    }
+    urls: {
+        type: string;
+        url: string;
+    }[]
+}
+
+interface series {
+    resourceURI: string;
+    name: string;
 }
 interface comic {
     resourceURI: string;
