@@ -27,9 +27,9 @@ jobs:
         run: |
           npm ci
           npm run build
-        env: 
-          REACT_APP_MARVEL_API_KEY: ${{secrets.REACT_APP_MARVEL_API_KEY}}
-          REACT_APP_MARVEL_API_PRIVATE_KEY: ${{secrets.REACT_APP_MARVEL_API_PRIVATE_KEY}}
+        env:
+          VITE_MARVEL_API_KEY: ${{secrets.REACT_APP_MARVEL_API_KEY}}
+          VITE_MARVEL_API_PRIVATE_KEY: ${{secrets.REACT_APP_MARVEL_API_PRIVATE_KEY}}
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
