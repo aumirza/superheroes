@@ -4,10 +4,12 @@ import { FilterIcon, XIcon } from "lucide-react";
 
 interface FilterByLetterProps {
   onFilterChange: (letter: string) => void;
+  resetSearch: () => void;
 }
 
 export const FilterByLetter: React.FC<FilterByLetterProps> = ({
   onFilterChange,
+  resetSearch,
 }) => {
   const [popUpOpen, setPopUpOpen] = useState(false);
   const [filterBy, setFilterBy] = useState("");
@@ -16,12 +18,14 @@ export const FilterByLetter: React.FC<FilterByLetterProps> = ({
     const letterLowerCase = letter.toLocaleLowerCase();
     setFilterBy(letterLowerCase);
     onFilterChange(letterLowerCase);
+    resetSearch();
     setPopUpOpen(false);
   };
 
   const removeFilter = () => {
     setFilterBy("");
     onFilterChange("");
+    resetSearch();
   };
 
   return (
