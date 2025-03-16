@@ -1,23 +1,18 @@
-import { ReactNode } from "react";
-import CoverImage from "../assets/cover.png";
+import { Link } from "react-router-dom";
+import { ChevronLeftCircleIcon } from "lucide-react";
 
-type Props = {
-  children: ReactNode;
-};
-
-export const Header: React.FC<Props> = ({ children }) => {
+export const CharacterHeader = ({ name }: { name?: string }) => {
   return (
-    <header className="relative overflow-clip h-64 w-full bg-red-600 flex justify-center items-center">
-      <img
-        className="absolute top-0 md:h-[200%] opacity-30 z-10"
-        src={CoverImage}
-        alt=""
-      />
-      <div className="flex flex-col items-center">
-        <h1 className="md:text-5xl text-3xl z-20 text-white font-bold font-serif ml-5">
-          Marvel characters
-        </h1>
-        <div className="z-20">{children}</div>
+    <header className="relative flex items-center justify-center w-full h-16 bg-red-500">
+      <div className="absolute left-0 flex items-center justify-center h-full w-14">
+        <Link to="/">
+          <ChevronLeftCircleIcon className="text-2xl text-white md:text-3xl" />
+        </Link>
+      </div>
+      <div>
+        <span className="text-xl font-semibold text-white md:text-3xl">
+          {name}
+        </span>
       </div>
     </header>
   );

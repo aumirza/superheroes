@@ -7,17 +7,18 @@ interface Prop {
 export const CharacterItem: React.FC<Prop> = ({ character }) => {
   return (
     <Link to={`/characters/${character.id}`}>
-      <div className="h-48 w-44 md:h-56 md:w-56 hover:scale-110 flex flex-col border-1 bg-white rounded-lg shadow p-2 transition-all">
-        <div className="h-44 w-40 md:h-48 md:w-52 overflow-hidden rounded-md">
+      <div className="relative flex flex-col p-2 bg-white rounded-lg shadow border-1">
+        <div className="overflow-hidden rounded">
           <img
-            height={190}
-            width={220}
+            className="w-full h-full transition-all duration-200 aspect-square hover:scale-125"
             alt={character.name}
             src={character.thumbnail.path + "." + character.thumbnail.extension}
           />
         </div>
-        <div>
-          <span>{character.name}</span>
+        <div className="absolute p-3 bg-red-500 bottom-5 rounded-tr-xl">
+          <span className="text-lg font-semibold text-white">
+            {character.name}
+          </span>
         </div>
       </div>
     </Link>
