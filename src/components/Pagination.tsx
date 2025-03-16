@@ -1,30 +1,33 @@
+import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronLeftIcon, ForwardIcon } from "lucide-react";
+import { FC, PropsWithChildren } from "react";
+
 interface PBProps {
-  text: string;
   highlight?: boolean;
   disabled?: boolean;
   onClick?: () => void;
   className?: string;
 }
 
-const PaginationButton: React.FC<PBProps> = ({
-  text,
+const PaginationButton: FC<PropsWithChildren<PBProps>> = ({
   highlight,
   disabled,
   onClick,
   className,
+  children,
 }) => (
   <button
     disabled={disabled}
     onClick={onClick}
-    className={
-      "border rounded-md p-2 md:px-3 disabled:bg-gray-300" +
-      " " +
-      (highlight ? "bg-red-500 text-white" : "bg-white") +
-      " " +
+    className={cn(
+      "flex items-center justify-center border rounded p-2 md:px-3 disabled:bg-gray-300 cursor-pointer transition-all duration-100 ease-in-out disabled:text-black disabled:cursor-not-allowed gap-1",
+      highlight
+        ? "bg-red-500 text-white hover:bg-red-400"
+        : "bg-white hover:bg-red-500 hover:text-white",
       className
-    }
+    )}
   >
-    {text}
+    {children}
   </button>
 );
 
@@ -46,60 +49,68 @@ export const Pagination: React.FC<Props> = ({
 
   return (
     <div className="">
-      <div className="text-center text-lg text-red-500">
+      <div className="text-lg text-center text-red-500">
         Page {currPage} of {totalPages}
       </div>
       <div className="flex gap-1">
         <PaginationButton
-          text="First"
           disabled={currPage === 1}
           onClick={() => setCurrPage(1)}
-        />
+        >
+          <ForwardIcon className="rotate-180" />
+          <span>First</span>
+        </PaginationButton>
 
         <PaginationButton
-          className="hidden md:block"
+          className="hidden md:flex"
           onClick={() => setCurrPage(currPage - 1)}
           disabled={currPage === 1}
-          text="Previous"
-        />
+        >
+          <ChevronLeft />
+          <span>Previous</span>
+        </PaginationButton>
 
-        {new Array(currPage > buttonsToShow ? buttonsToShow : currPage - 1)
-          .fill(1)
+        {Array.from({ length: Math.min(buttonsToShow, currPage - 1) })
+          .map((_, i) => currPage - (i + 1))
           .reverse()
-          .map((_, i, arr) => (
+          .map((pageNum) => (
             <PaginationButton
-              key={currPage - arr.length + i}
-              onClick={() => setCurrPage(currPage - i)}
-              text={(currPage - arr.length + i).toString()}
-            />
+              key={pageNum}
+              onClick={() => setCurrPage(pageNum)}
+            >
+              {pageNum.toString()}
+            </PaginationButton>
           ))}
 
-        <PaginationButton highlight={true} text={currPage.toString()} />
-        {new Array(
-          totalPages - currPage > buttonsToShow
-            ? buttonsToShow
-            : totalPages - currPage
-        )
-          .fill(1)
-          .map((_, i) => (
+        <PaginationButton highlight={true}>
+          {currPage.toString()}
+        </PaginationButton>
+        {Array.from({ length: Math.min(buttonsToShow, totalPages - currPage) })
+          .map((_, i) => currPage + (i + 1))
+          .map((pageNum) => (
             <PaginationButton
-              key={currPage + i + 1}
-              onClick={() => setCurrPage(currPage + i + 1)}
-              text={(currPage + i + 1).toString()}
-            />
+              key={pageNum}
+              onClick={() => setCurrPage(pageNum)}
+            >
+              {pageNum.toString()}
+            </PaginationButton>
           ))}
 
         <PaginationButton
-          className="hidden md:block"
+          className="hidden md:flex"
           onClick={() => setCurrPage(currPage + 1)}
           disabled={currPage === totalPages}
-          text="Next"
-        />
+        >
+          <span>Next</span>
+          <ChevronLeftIcon className="rotate-180" />
+        </PaginationButton>
         <PaginationButton
-          text="Last"
           disabled={currPage === items.length}
           onClick={() => setCurrPage(totalPages)}
-        />
+        >
+          <span>Last</span>
+          <ForwardIcon />
+        </PaginationButton>
       </div>
     </div>
   );
