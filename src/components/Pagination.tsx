@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronLeftIcon, ForwardIcon } from "lucide-react";
+import { ChevronLeft, ChevronLeftIcon, ChevronsUpIcon } from "lucide-react";
 import { FC, PropsWithChildren } from "react";
 
 interface PBProps {
@@ -48,8 +48,8 @@ export const Pagination: React.FC<Props> = ({
   const buttonsToShow = 2;
 
   return (
-    <div className="">
-      <div className="text-lg text-center text-red-500">
+    <div className="flex flex-col gap-1">
+      <div className="text-center text-red-500">
         Page {currPage} of {totalPages}
       </div>
       <div className="flex gap-1">
@@ -57,7 +57,8 @@ export const Pagination: React.FC<Props> = ({
           disabled={currPage === 1}
           onClick={() => setCurrPage(1)}
         >
-          <ForwardIcon className="rotate-180" />
+          <ChevronsUpIcon className="-rotate-90" />
+
           <span>First</span>
         </PaginationButton>
 
@@ -109,7 +110,7 @@ export const Pagination: React.FC<Props> = ({
           onClick={() => setCurrPage(totalPages)}
         >
           <span>Last</span>
-          <ForwardIcon />
+          <ChevronsUpIcon className="rotate-90" />
         </PaginationButton>
       </div>
     </div>
