@@ -19,7 +19,7 @@ export const Home = () => {
   const [sortAsc, setSortAsc] = useState<boolean>(true);
 
   const [currPage, setCurrPage] = useState(1);
-  const [perPage] = useState(9);
+  const [perPage] = useState(12);
 
   useEffect(() => {
     marvelApiService
